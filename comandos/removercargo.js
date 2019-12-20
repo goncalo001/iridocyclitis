@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args, ops) => {
 module.exports.config = {
     name: "removercargo",
     description: "para criar um cargo no servidor.",
-    usage: "! + removercargo + (nome do cargo) + (nome do usuário)",
+    usage: "! + removercargo + (nome do usuário) + (nome do cargo)",
     aliases: ["rmcg"],
     accessablelby: "Administrador"
 }

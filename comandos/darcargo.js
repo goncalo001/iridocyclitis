@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, ops) => {
 module.exports.config = {
     name: "darcargo",
     description: "para atribuir um cargo.",
-    usage: "! + darcargo + (nome do cargo) + (nome do usuário)",
+    usage: "! + darcargo + (nome do usuário) + (nome do cargo)",
     aliases: ["drcg"],
     accessablelby: "Administrador"
 }
