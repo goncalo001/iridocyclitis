@@ -8,10 +8,15 @@ const ascii = require("ascii-art");
 module.exports.run = async (bot, message, args) => {
     if(!args.join(' ')) return message.channel.send("É necessário escrever algum texto para converter para ascii.").then(m => m.delete(2000));
     
-    ascii.font(args.join(' '), 'Doom', async txt => {
-        message.channel.send(txt, {
-            code: 'md'
-        });
+    ascii.font(args.join(' '), 'Doom', function(rendered) {
+       rendered = rendered.trimRight();
+
+       if(rendered.length > 2000) return message.channel.send("Essa mensagem é muito longa.").then(m => m.delete(2000));
+
+       message.channel.send(rendered, {
+           code: 'md'
+       })
+    
     });
    
     
