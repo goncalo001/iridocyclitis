@@ -59,13 +59,32 @@ bot.on("ready", async () => {
 
     let memberCount = myGuild.memberCount;
 
+    let roleCount = myGuild.roles.size;
+
+    let memberOnline = myGuild.members.filter((x) => x.presence.status === "online").size
+
     let memberCountChannel = myGuild.channels.get('656632482048770051')
+
+    let roleCountChannel = myGuild.channels.get('657749824233406495')
+
+    let memberOnlineChannel = myGuild.channels.get('657752359648362527')
+
+    roleCountChannel.setName("Cargos: " + roleCount)
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
 
    
 
     memberCountChannel.setName("Membros: " + memberCount)
     .then(result => console.log(result))
     .catch(error => console.log(error))
+
+    memberOnlineChannel.setName("Membros online: " + memberOnline)
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
+
+
+
 
 })
 
