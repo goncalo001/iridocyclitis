@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
 
     if(!text) return message.channel.send("É necessário escrever algum texto para converter para ascii.").then(m => m.delete(2000));
     
-    let text = args.join(" ");
+  
         
         
     
