@@ -1,25 +1,26 @@
 const Discord = require("discord.js");
 const botconfig = require("../botconfig.json");
 const cores = require("../cores.json");
-const Font = require('ascii-art-table');
+const ascii = require('ascii-art');
 
 
 
-module.exports.run = async (bot, message, args, ops) => {
+module.exports.run = async (bot, message, args) => {
 
-    Font.fontPath = 'Fonts'
+    let text = args.join(" ");
 
-    if(!args.join(' ')) return message.channel.send("É necessário escrever algum texto para converter para ascii.").then(m => m.delete(2000));
+    if(!text) return message.channel.send("É necessário escrever algum texto para converter para ascii.").then(m => m.delete(2000));
     
-    Font.create(args.join(' '), 'Doom', async function(rendered) {
-
-        console.log(rendered)
-
-       message.channel.send(rendered, {
-           code: 'md'
-       })
+    let text = args.join(" ");
+        
+        
     
+    ascii.font(text, "Doom", function(rendered) {
+
+        message.channel.send("```"+rendered+"```");
     });
+
+    
    
     
 }
