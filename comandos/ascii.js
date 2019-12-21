@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
     
     ascii.font(text, "Doom", function(rendered) {
 
-        message.channel.send("```"+rendered+"```");
+        message.channel.send(``+ rendered +``);
     });
 
     
