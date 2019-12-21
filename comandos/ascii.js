@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
     if(!args.join(' ')) return message.channel.send("É necessário escrever algum texto para converter para ascii.").then(m => m.delete(2000));
     
     ascii.font(args.join(' '), 'Doom', function(renderer) {
-       renderer = renderer.trimRight();
+       renderer.trimRight();
 
        if(renderer.length > 2000) return message.channel.send("Essa mensagem é muito longa.").then(m => m.delete(2000));
 
