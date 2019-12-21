@@ -53,35 +53,29 @@ fs.readdir("./nsfw/", (err, files) => {
 bot.on("ready", async () => {
     console.log(`${bot.user.username} está online!`);
 
-    bot.user.setActivity("iridocyclitis", {type:"WATCHING"});
-
-    let myGuild = bot.guilds.get('651776180965343253')
-
-    let memberCount = myGuild.memberCount;
-
-    let roleCount = myGuild.roles.size;
-
-    let memberOnline = myGuild.members.filter((x) => x.presence.status === "online").size
-
-    let memberCountChannel = myGuild.channels.get('656632482048770051')
-
-    let roleCountChannel = myGuild.channels.get('657749824233406495')
-
-    let memberOnlineChannel = myGuild.channels.get('657752359648362527')
-
-    roleCountChannel.setName("Cargos: " + roleCount)
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
-
-   
-
-    memberCountChannel.setName("Membros: " + memberCount)
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
-
-    memberOnlineChannel.setName("Membros online: " + memberOnline)
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
+    bot.user.setActivity("iridocyclitis", {type:"PLAYING"});
+    const guild = bot.guilds.get("651776180965343253");
+    const getStats = () => {
+        return {
+            online: guild.members.filter((x) => x.presence.status === "online").size,
+            bots: guild.members.filter((x) => x.user.bot).size,
+            roles: guild.roles.size,
+            members: guild.memberCount
+        }
+    };
+    const [onlineC, botsC, rolesC, memberC] = [
+        guild.channels.get("657752359648362527"),
+        guild.channels.get("657756649695608854"),
+        guild.channels.get("657749824233406495"),
+        guild.channels.get("656632482048770051")
+    ];
+    setInterval(() => {
+        const { online, bots, roles, members } = getStats();
+        onlineC.setName(`Membros online: ${online}`);
+        botsC.setName(`Bots: ${bots}`);
+        rolesC.setName(`Cargos: ${roles}`);
+        memberC.setName(`Membros: ${members}`)
+    }, timeInMS)
 
 
 
