@@ -1,29 +1,37 @@
 const Discord = require("discord.js");
 const botconfig = require("../botconfig.json");
 const cores = require("../cores.json");
-const ascii = require('ascii-art');
+const figlet = require('figlet');
 
 
 
 module.exports.run = async (bot, message, args) => {
+    try {
+        if (!args.join(' ')) return message.channel.send('É necessário introduxir texto para ser convertido para ascii').then(m => m.delete(2000))
+        figlet.text(args.join(' '), {
+            font: "ANSI Shadow",
+            horizontalLayout: "default",
+            verticalLayout: "default"
+        }, function (err, data) {
+            if (err) {
+                console.log("Ocorreu um erro...")
+                console.dir(err)
+                return;
+            }
+            message.channel.send(data, {
+                code: "md"
+            })
+        })
+    } catch (err) {
+        console.error(err)
+    }
+}
 
-    let text = args.join(" ");
-
-    if(!text) return message.channel.send("É necessário escrever algum texto para converter para ascii.").then(m => m.delete(2000));
     
-  
-        
-        
-    
-    ascii.font(text, "Doom", function(rendered) {
-
-        message.channel.send("```"+ rendered +"```");
-    });
-
     
    
     
-}
+
 
 module.exports.config = {
     name: "ascii",
