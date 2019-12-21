@@ -75,7 +75,7 @@ bot.on("ready", async () => {
         botsC.setName(`Bots: ${bots}`);
         rolesC.setName(`Cargos: ${roles}`);
         memberC.setName(`Membros: ${members}`)
-    }, timeInMS)
+    }, 3000)
 
 
 
