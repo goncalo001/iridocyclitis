@@ -5,16 +5,20 @@ const figlet = require('figlet');
 const fs = require('fs');
 const path = require('path');
 
-let data = fs.readFileSync(path.join(__dirname, "Minecraftia.ttf"), "utf8");
-figlet.parseFont('Minecraftia', data);
+
+
 
 
 
 module.exports.run = async (bot, message, args) => {
+
+    
+let data = fs.readFileSync(path.join(__dirname, "Hieroglyphs.flf"), "utf8");
+figlet.parseFont('Hieroglyphs', data);
     try {
         if (!args.join(' ')) return message.channel.send('É necessário introduxir texto para ser convertido para ascii').then(m => m.delete(2000))
         figlet.text(args.join(' '), {
-            font: "Minecraftia",
+            font: "Hieroglyphs",
             horizontalLayout: "default",
             verticalLayout: "default"
         }, function (err, data) {
@@ -39,9 +43,9 @@ module.exports.run = async (bot, message, args) => {
 
 
 module.exports.config = {
-    name: "minecraft",
-    description: "transforma texto normal em minecraftia.",
-    usage: "! + minecraft + (texto)",
-    aliases: ["minecrafttexto", "mctexto"],
+    name: "hieroglifos",
+    description: "transforma texto normal em hieroglifos.",
+    usage: "! + hieroglifos + (texto)",
+    aliases: ["hr"],
     accessablelby: "Membros"
 }
