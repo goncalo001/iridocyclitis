@@ -2,7 +2,7 @@ const botconfig = require("./botconfig.json");
 const { Collection, RichEmbed } = require("discord.js");
 const cores = require("./cores.json")
 const MusicClient = require('./Client')
-const bot = new MusicClient({token: process.env.token, prefix: prefix});
+const bot = new MusicClient({token: process.env.token});
 
 
 
