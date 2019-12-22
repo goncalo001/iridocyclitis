@@ -1,14 +1,15 @@
 const botconfig = require("./botconfig.json");
-const Discord = require("discord.js");
+const { Collection, RichEmbed } = require("discord.js");
 const cores = require("./cores.json")
-const bot = new Discord.Client();
+const MusicClient = require('./Client')
+const bot = new MusicClient({token: process.env.token, prefix: prefix});
 
 
 
 
 const fs = require("fs");
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
+bot.commands = new Collection();
+bot.aliases = new Collection();
 
 fs.readdir("./comandos/", (err, files) => {
 
@@ -45,8 +46,6 @@ fs.readdir("./nsfw/", (err, files) => {
         });
     });
 });
-
-
 
 
 
@@ -126,7 +125,7 @@ bot.on("guildMemberAdd", member => {
     
 
 
-    let embed = new Discord.RichEmbed()
+    let embed = new RichEmbed()
     .setColor(cores.azul)
     .setTitle("**Alcólicos Anónimos**")
     .setThumbnail(`${member.user.displayAvatarURL}`)
@@ -159,7 +158,7 @@ bot.on("guildMemberRemove", member => {
     
 
 
-    let embed = new Discord.RichEmbed()
+    let embed = new RichEmbed()
     .setColor(cores.azul)
     .setTitle("**Alcólicos Anónimos**")
     .setThumbnail(`${member.user.displayAvatarURL}`)

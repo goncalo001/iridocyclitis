@@ -2,6 +2,7 @@ const { Util } = require("discord.js");
 const botconfig = require("../botconfig.json");
 const cores = require("../cores.json");
 const ytdl = require("ytdl-core");
+const ytdlDiscord = require('ytdl-core-discord');
 
 
 const opusscript = require("opusscript");
@@ -9,26 +10,67 @@ const opusscript = require("opusscript");
 
 
 
-module.exports.run = async (bot, message, args, ops) => {
+module.exports.run = async (bot, message, args) => {
 
     if(!message.member.voiceChannel) return message.channel.send("É necessário que se conecte a um canal de voz.").then(m => m.delete(2000));
 
     if(message.guild.me.voiceChannel) return message.channel.send("Já me encontro num canal de voz.").then(m => m.delete(2000));
-
-    if(!args[0]) return message.channel.send("É necessário fornecer um link").then(m => m.delete(2000));
     
-    let validate = await ytdl.validateURL(args[0]);
+    const serverQueue = message.bot.queue.get(message.guild.id);
+		const songInfo = await ytdl.getInfo(args[0]);
+		const song = {
+			id: songInfo.video_id,
+			title: Util.escapeMarkdown(songInfo.title),
+			url: songInfo.video_url
+		};
 
-    if(!validate) return message.channel.send("Ocorreu um erro! Tente de novo.").then(m => m.delete(2000));
+		if (serverQueue) {
+			serverQueue.songs.push(song);
+			console.log(serverQueue.songs);
+			return message.channel.send(`✅ **${song.title}** has been added to the queue!`);
+		}
 
-    let info = await ytdl.getInfo(args[0]);
+		const queueConstruct = {
+			textChannel: message.channel,
+			voiceChannel,
+			connection: null,
+			songs: [],
+			volume: 2,
+			playing: true
+		};
+		message.bot.queue.set(message.guild.id, queueConstruct);
+		queueConstruct.songs.push(song);
 
-    let connection = await message.member.voiceChannel.join();
+		const play = async song => {
+			const queue = message.bot.queue.get(message.guild.id);
+			if (!song) {
+				queue.voiceChannel.leave();
+				message.bot.queue.delete(message.guild.id);
+				return;
+			}
 
-    let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly' }));
-    
-    message.channel.send(` ▶️ A reproduzir: ${info.title}`)
-    
+			const dispatcher = queue.connection.playOpusStream(await ytdlDiscord(song.url), { passes: 3 })
+				.on('end', reason => {
+					if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
+					else console.log(reason);
+					queue.songs.shift();
+					play(queue.songs[0]);
+				})
+				.on('error', error => console.error(error));
+			dispatcher.setVolumeLogarithmic(queue.volume / 5);
+			queue.textChannel.send(`🎶 Start playing: **${song.title}**`);
+		};
+
+		try {
+			const connection = await voiceChannel.join();
+			queueConstruct.connection = connection;
+			play(queueConstruct.songs[0]);
+		} catch (error) {
+			console.error(`I could not join the voice channel: ${error}`);
+			message.bot.queue.delete(message.guild.id);
+			await voiceChannel.leave();
+			return message.channel.send(`I could not join the voice channel: ${error}`);
+		}
 }
 
 module.exports.config = {
