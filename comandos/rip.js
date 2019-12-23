@@ -15,7 +15,6 @@ module.exports.run = async (bot, message, args, ops) => {
     jimp.read(user.displayAvatarURL, (err, avatar) => {
         
         avatar.resize(150, 150)
-        avatar.greyscale()
         background.resize(300, 310)
         background.greyscale()
         background.composite(avatar, 80, 80).write("rest_in_peace.png")
