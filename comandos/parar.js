@@ -6,16 +6,15 @@ const opusscript = require("opusscript");
 
 
 module.exports.run = async (bot, message, args, ops) => {
+    let queue = bot.queue.get(message.guild.id);
 
-    if(!message.member.voiceChannel) return message.channel.send("É necessário estar conectado a um canal de voz.").then(m => m.delete(2000));
+    if(!message.member.voiceChannel) return [message.delete(), message.channel.send(`É necessário juntar-se a um canal de voz para poder usar este comando.`).then(m => m.delete(2000))];
 
-    if(!message.guild.me.voiceChannel) return message.channel.send("Não me encontro num canal de voz.").then(m => m.delete(2000));
+    if(!queue) return [message.delete(), message.channel.send(`Não existem músicas a serem reproduzidas`).then(m => m.delete(2000))];
 
-    if(message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send("Não nos encontramos no mesmo canal de voz.").then(m => m.delete(2000));
+    queue.musics = [];
+    queue.connection.dispatcher.end();
 
-    message.guild.me.voiceChannel.leave();
-
-    message.channel.send(" 🔳 A parar ...").then(m => m.delete(2000))
     
 }
 

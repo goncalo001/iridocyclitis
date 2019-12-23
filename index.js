@@ -1,15 +1,16 @@
 const botconfig = require("./botconfig.json");
-const { Collection, RichEmbed } = require("discord.js");
+const Discord = require("discord.js");
 const cores = require("./cores.json")
-const MusicClient = require('./Client')
-const bot = new MusicClient({token: process.env.token});
-
-
-
+const bot = new Discord.Client();
+const ytdl = require('ytdl-core');
+const Youtube = require('simple-youtube-api');
+const {YoutubeAPIKey} = require(process.env.YoutubeAPI)
 
 const fs = require("fs");
-bot.commands = new Collection();
-bot.aliases = new Collection();
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
+bot.queue = new Map();
+bot.youtube = new Youtube(YoutubeAPIKey)
 
 fs.readdir("./comandos/", (err, files) => {
 
@@ -125,7 +126,7 @@ bot.on("guildMemberAdd", member => {
     
 
 
-    let embed = new RichEmbed()
+    let embed = new Discord.RichEmbed()
     .setColor(cores.azul)
     .setTitle("**Alcólicos Anónimos**")
     .setThumbnail(`${member.user.displayAvatarURL}`)
@@ -158,7 +159,7 @@ bot.on("guildMemberRemove", member => {
     
 
 
-    let embed = new RichEmbed()
+    let embed = new Discord.RichEmbed()
     .setColor(cores.azul)
     .setTitle("**Alcólicos Anónimos**")
     .setThumbnail(`${member.user.displayAvatarURL}`)
