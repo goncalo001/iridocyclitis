@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const botconfig = require("../botconfig.json");
 const cores = require("../cores.json");
+const jimp = require('jimp');
 
 
 
