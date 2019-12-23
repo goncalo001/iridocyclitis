@@ -5,15 +5,17 @@ const ytdl = require("ytdl-core");
 const opusscript = require("opusscript");
 
 
-module.exports.run = async (bot, message, args, ops) => {
-    let queue = bot.queue.get(message.guild.id);
+module.exports.run = async (bot, message, args) => {
 
-    if(!message.member.voiceChannel) return [message.delete(), message.channel.send(`É necessário juntar-se a um canal de voz para poder usar este comando.`).then(m => m.delete(2000))];
+    if(!message.member.voiceChannel) return message.channel.send("É necessário conectar-se a um canal de voz para poder parar música.").then(m => m.delete(2000));
 
-    if(!queue) return [message.delete(), message.channel.send(`Não existem músicas a serem reproduzidas`).then(m => m.delete(2000))];
+    if(!message.guild.me.voiceChannel) return message.channel.send("Não me encontro num canal de voz.").then(m => m.delete(2000));
 
-    queue.musics = [];
-    queue.connection.dispatcher.end();
+    if(message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send("Não nos encontramos no mesmo canal de voz.").then(m => m.delete(2000));
+
+    message.guild.me.voiceChannel.leave();
+
+    message.channel.send("🎶 A parar a reprodução 🎶 ...").then(m => m.delete(2000));
 
     
 }

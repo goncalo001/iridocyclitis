@@ -2,15 +2,10 @@ const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const cores = require("./cores.json")
 const bot = new Discord.Client();
-const ytdl = require('ytdl-core');
-const Youtube = require('simple-youtube-api');
-const {YoutubeAPIKey} = require(process.env.YoutubeAPI)
 
 const fs = require("fs");
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
-bot.queue = new Map();
-bot.youtube = new Youtube(YoutubeAPIKey)
 
 fs.readdir("./comandos/", (err, files) => {
 
