@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp()
         .setDescription(`Estes são os comandos disponíveis para o bot iridocyclitis.\nO prefixo do bot é: ${prefix}.\nPara obter um menu de ajuda específico para cada comando digite: ! + ajuda + (comando).`)
         .setTitle(`**Comandos**`)
-        .addField(`🔨 Moderação:`, "``banir`` ``desbanir`` ``mute`` ``unmute`` ``expulsar`` ``limpar`` ``criarcanaltexto`` ``apagarcanal`` ``criarcanalvoz`` ``criarcategoria`` ``criarcargo`` ``apagarcargo`` ``darcargo`` ``removercargo`` ``dm`` ``bloquearcanal`` ``desbloquear canal``")
+        .addField(`🔨 Moderação:`, "``banir`` ``desbanir`` ``mute`` ``unmute`` ``expulsar`` ``limpar`` ``criarcanaltexto`` ``apagarcanal`` ``criarcanalvoz`` ``criarcategoria`` ``criarcargo`` ``apagarcargo`` ``darcargo`` ``removercargo`` ``dm`` ``bloquearcanal`` ``desbloquear canal`` ``desligar`` ``recarregar``")
         .addField(`☺️ Diversão:`, "``memes`` ``bola8`` ``matar`` ``pesquisar`` ``gayradar`` ``sondagem`` ``urban`` ``piada`` ``roast`` ``confissão`` ``photograph`` ``illegal`` ``wanted`` ``beautiful`` ``newchallenger`` ``triggered`` ``yugiohcard`` ``worthless`` ``rip`` ``pedrapapeltesoura`` ``roletarussa`` ``ascii`` ``spoiler`` ``ghost`` ``pixelizar`` ``nickname``")
         .addField(`⚒️ Utíl:`, "``infoservidor`` ``infousuário`` ``ajuda`` ``metereologia``")
         .addField(`🔞 NSFW:`, "``ass`` ``boobs`` ``anal`` ``pussy`` ``porngif`` ``4k`` ``pornhub``")
