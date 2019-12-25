@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
         
         avatar.resize(300, 300);
 
-        avatar.pixelate(size[300, 300]);
+        avatar.pixelate(300, 300);
         
         
         message.channel.send(new Discord.Attachment("pixelizado.png"));
