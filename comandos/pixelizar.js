@@ -11,9 +11,9 @@ module.exports.run = async (bot, message, args) => {
     
     jimp.read(user.displayAvatarURL, (err, avatar) => {
         
-        avatar.resize(300, 300)
+        avatar.resize(300, 300);
 
-        avatar.pixelate()
+        avatar.pixelate(size[300, 300]);
         
         
         message.channel.send(new Discord.Attachment("pixelizado.png"));
