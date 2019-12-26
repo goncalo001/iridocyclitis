@@ -17,13 +17,14 @@ module.exports.run = async (bot, message, args) => {
 
     const query = queryString.stringify({term: args.join(' ')});
 
+    let img = "https://i.imgur.com/aZO5Kol.jpg"
+
     const { list } = await fetch(google.search(query).then(res => {
         let embed = new Discord.RichEmbed()
         .setColor(cores.azul)
         .setTitle(`${res.title}`)
-        .setURL(`https://www.google.com/search?q=${query}+api&oq=${query}`)
         .addField(`**Resultados Google:**\n${res.snippet}`)
-        .addField(`**Link:**\n https://www.google.com/search?q=${query}+api&oq=${query}`)
+        .setThumbnail(img)
         message.channel.send(embed)
     }))
 
