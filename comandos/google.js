@@ -21,9 +21,9 @@ module.exports.run = async (bot, message, args) => {
         let embed = new Discord.RichEmbed()
         .setColor(cores.azul)
         .setTitle(`${res.title}`)
-        .setURL(`https://www.googleapis.com/customsearch/v1?key=${googleAPIKey}&cx=013036536707430787589:_pqjad5hr1a&q=${query}`)
+        .setURL(`${res}`)
         .addField(`**Resultados Google:**\n${res.snippet}`)
-        .addField(`**Link:**\nhttps://www.googleapis.com/customsearch/v1?key=${googleAPIKey}&cx=013036536707430787589:_pqjad5hr1a&q=${query}`)
+        .addField(`**Link:**\n${res}`)
         message.channel.send(embed)
     }))
 
