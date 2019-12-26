@@ -21,9 +21,9 @@ module.exports.run = async (bot, message, args) => {
         let embed = new Discord.RichEmbed()
         .setColor(cores.azul)
         .setTitle(`${res.title}`)
-        .setURL(`${res.formattedUrl}`)
-        .addField(`Resultados Google:` (res.snippet))
-        .addField(`Link:`(`${res.formattedUrl}`))
+        .setURL(`${res.formattedURL}`)
+        .addField(`Resultados Google:\n${res.snippet}`)
+        .addField(`Link:\n${res.formattedURL}`)
         message.channel.send(embed)
     }))
 
