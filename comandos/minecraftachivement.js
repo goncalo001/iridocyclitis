@@ -4,7 +4,7 @@ const cores = require("../cores.json");
 const MCA = require('minecraft-achievement');
 
 module.exports.run = async (bot, message, args) => {
-    let args = message.content.split(" ");
+    args = message.content.split(" ");
 
     var url = MCA.url({
         title: args[0],
