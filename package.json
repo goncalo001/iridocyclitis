@@ -17,6 +17,7 @@
     "figlet": "^1.2.4",
     "horsengel-roulette": "^1.0.3",
     "jimp": "^0.9.3",
+    "minecraft-achievement": "0.0.1",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "one-liner-joke": "^1.2.0",
