@@ -7,10 +7,11 @@ module.exports.run = async (bot, message, args) => {
     if (!query) return message.channel.send("É necessário introduzir um termo de pesquisa.").then(m => m.delete(2000));
     if (!message.channel.nsfw) return message.channel.send("É necessário que esteja num canal nsfw para poder usar este comando.").then(m => m.delete(2000));
     const Pornsearch = require('pornsearch').search(query);
-    Pornsearch.driver('sex');
+    Pornsearch.driver('sex')
         Pornsearch.gifs(1)
             .then(gifs => {
                 let gifrnd = gifs.map(gif => gif.url)
+                console.log(gifs)
                 let embed = new Discord.RichEmbed()
                     .setColor(cores.azul)
                     .setImage(gifrnd[Math.floor(Math.random() * gifrnd.length)])
