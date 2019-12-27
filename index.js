@@ -13,7 +13,7 @@ fs.readdir("./comandos/", (err, files) => {
   
     let jsfile = files.filter(f => f.split(".").pop() === "js") 
     if(jsfile.length <= 0) {
-         return console.log("[LOGS] Couldn't Find Commands!");
+         return console.log("[LOGS] Não foram encontrados comandos!");
     }
 
     jsfile.forEach((f, i) => {
@@ -31,7 +31,7 @@ fs.readdir("./nsfw/", (err, files) => {
 
     let jsfile = files.filter(f => f.split(".").pop() === "js") 
     if(jsfile.length <= 0) {
-         return console.log("[LOGS] Couldn't Find Commands!");
+         return console.log("[LOGS] Não foram encontrados comandos!");
     }
 
     jsfile.forEach((f, i) => {
