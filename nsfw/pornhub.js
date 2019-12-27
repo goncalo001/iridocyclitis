@@ -1,26 +1,37 @@
 const Discord = require("discord.js");
 const botconfig = require("../botconfig.json");
 const cores = require("../cores.json");
-const search = require('random-puppy');
+
 
 module.exports.run = async (bot, message, args) => {
-    if (!message.channel.nsfw) return message.channel.send("É necessário estar num canal de nsfw para poder usar este comando.")
+    if (!message.channel.nsfw) return message.channel.send("É necessário estar num canal de nsfw para poder usar este comando.").then(m => m.delete(2000));
 
-      args = args.join(" ");
-  
-      let res = args[Math.floor(Math.random()*args.length)]
-      let pornEmbed = new Discord.RichEmbed()
-      .setTitle("Porn")
-      .setFooter(`Requested by ${message.author.username}`)
-      .setTimestamp()
-  
-      search(res).then(url => {
-        pornEmbed.setImage(url)
-        message.channel.send({embed: pornEmbed})
-      })
-   
+    args = message.content.split(" ").slice(1);
 
-            
+    if(args.length === 0) return message.channel.send("É necessário introduzir um termo de pesquisa.").then(m => m.delete(2000));
+
+    const Pornsearch = require("pornsearch");
+
+    try {
+      const Searcher = new Pornsearch(args.join(" "), 'sex');
+
+      const gifs = await Searcher.gifs();
+
+      const result = Math.floor(Math.random() * gifs.length);
+
+      const { url } = gifs[result - 1];
+
+      let embed = new Discord.RichEmbed()
+      .setColor(cores.azul)
+      .setImage(url)
+      .setURL(url)
+      .setAuthor(url)
+
+      message.channel.send(embed)
+
+    } catch(error) {
+      console.error(error);
+    }          
     
 }
 
