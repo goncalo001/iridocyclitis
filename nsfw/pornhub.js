@@ -1,19 +1,26 @@
 const Discord = require("discord.js");
 const botconfig = require("../botconfig.json");
 const cores = require("../cores.json");
+const search = require('random-puppy');
 
 module.exports.run = async (bot, message, args) => {
-    const query = args.join(' ')
-    if (!query) return message.channel.send("É necessário introduzir um termo de pesquisa.").then(m => m.delete(2000));
-    if (!message.channel.nsfw) return message.channel.send("É necessário que esteja num canal nsfw para poder usar este comando.").then(m => m.delete(2000));
-    const Pornsearch = require('pornsearch').search(query);
-    Pornsearch.driver('sex')
-        Pornsearch.gifs(1)
-            .then(gifs => {
-                let gifrnd = gifs.map(gif => gif.url)
-                console.log(gifs)
-                message.channel.send(gifrnd[Math.floor(Math.random() * gifrnd.length)])
-            })
+    if (!message.channel.nsfw) return message.channel.send("É necessário estar num canal de nsfw para poder usar este comando.")
+
+    let key = args[0];
+  
+      let res = key[Math.floor(Math.random()*key.length)]
+      let pornEmbed = new Discord.RichEmbed()
+      .setTitle("Porn")
+      .setFooter(`Requested by ${message.author.username}`)
+      .setTimestamp()
+  
+      search(res).then(url => {
+        pornEmbed.setImage(url)
+        message.channel.send({embed: pornEmbed})
+      })
+   
+
+            
     
 }
 
