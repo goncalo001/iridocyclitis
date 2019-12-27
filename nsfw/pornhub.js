@@ -6,9 +6,9 @@ const search = require('random-puppy');
 module.exports.run = async (bot, message, args) => {
     if (!message.channel.nsfw) return message.channel.send("É necessário estar num canal de nsfw para poder usar este comando.")
 
-    let key = args[0];
+      args = args.join(" ");
   
-      let res = key[Math.floor(Math.random()*key.length)]
+      let res = args[Math.floor(Math.random()*args.length)]
       let pornEmbed = new Discord.RichEmbed()
       .setTitle("Porn")
       .setFooter(`Requested by ${message.author.username}`)
