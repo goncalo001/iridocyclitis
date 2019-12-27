@@ -12,12 +12,7 @@ module.exports.run = async (bot, message, args) => {
             .then(gifs => {
                 let gifrnd = gifs.map(gif => gif.url)
                 console.log(gifs)
-                let embed = new Discord.RichEmbed()
-                    .setColor(cores.azul)
-                    .setImage(gifrnd[Math.floor(Math.random() * gifrnd.length)])
-                message.channel.send({
-                    embed: embed
-                })
+                message.channel.send(gifrnd[Math.floor(Math.random() * gifrnd.length)])
             })
     
 }
