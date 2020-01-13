@@ -20,7 +20,7 @@ if(!args.join('-')) return message.channel.send('É necessário fornecer o nome 
         .setDescription(`**Nome**: \`${name || 'Desconhecido'}\`
         **ID**: ${id || 'Desconhecido'}
         **Link**: **[link](${html_url})**
-        **Repositórios**: \`${repos_url.size || 0}\`
+        **Repositórios**: \`${repos_url || 0}\`
         **Seguidores**: \`${followers || 0}\`
         **A seguir**: \`${following || 0}\`
         **Localização**: \`${location || 'Desconhecida'}\`
