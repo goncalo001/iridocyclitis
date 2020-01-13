@@ -11,7 +11,7 @@ if(!args.join('-')) return message.channel.send('É necessário fornecer o nome 
     fetch(`https://api.github.com/users/${args.join('-')}`)
       .then(res => res.json()).then(body => {
         if(body.message) return message.channel.send(`O usuário: \`${args.join(' ')}\` não foi encontrado.`).then(m => m.delete(2000));
-      let { login, avatar_url, name, id, html_url, repositories, followers, following, location, created_at, bio } = body;
+      let { login, avatar_url, name, id, html_url, repos_url, followers, following, location, created_at, bio } = body;
 
       const embed = new Discord.RichEmbed()
         .setColor(cores.azul)
@@ -20,7 +20,7 @@ if(!args.join('-')) return message.channel.send('É necessário fornecer o nome 
         .setDescription(`**Nome**: \`${name || 'Desconhecido'}\`
         **ID**: ${id || 'Desconhecido'}
         **Link**: **[link](${html_url})**
-        **Repositórios**: \`${repositories || 0}\`
+        **Repositórios**: \`${repos_url.size || 0}\`
         **Seguidores**: \`${followers || 0}\`
         **A seguir**: \`${following || 0}\`
         **Localização**: \`${location || 'Desconhecida'}\`
