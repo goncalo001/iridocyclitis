@@ -34,6 +34,7 @@
     "superagent": "^5.1.2",
     "urban": "^0.3.2",
     "weather-js": "^2.0.0",
+    "youtube-search": "^1.1.4",
     "yt-search": "^0.4.1",
     "ytdl-core": "^1.0.3",
     "ytdl-core-discord": "^1.0.3"
