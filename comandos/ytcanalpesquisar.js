@@ -6,11 +6,11 @@ const youtubeSearch = require('youtube-search');
 module.exports.run = async (bot, message, args) => {
 
     const embed = new Discord.RichEmbed()
-        if(!args[0]) return message.channel.send(embed.setColor(cores.azul).setDescription(`${client.emojis.get('660343595626397699')} É necessário fornecer um termo de pesquisa.`));
+        if(!args[0]) return message.channel.send(embed.setColor(cores.azul).setDescription(`${bot.emojis.get('660343595626397699')} É necessário fornecer um termo de pesquisa.`));
         
             youtubeSearch(args.join(' '), { maxResults: 1, key: process.env.youtubeAPI }, (err, res) => {
-                if(!res) return message.channel.send(embed.setColor(cores.azul).setDescription(`${client.emojis.get('660343595626397699')} \`${args.join(' ')}\` Não foi encontrado no youtube.`));
-                if(err) return message.channel.send(embed.setColor(cores.azul).setDescription(`${client.emojis.get('660343595626397699')} Por favor tente outra vez mais tarde.`));
+                if(!res) return message.channel.send(embed.setColor(cores.azul).setDescription(`${bot.emojis.get('660343595626397699')} \`${args.join(' ')}\` Não foi encontrado no youtube.`));
+                if(err) return message.channel.send(embed.setColor(cores.azul).setDescription(`${bot.emojis.get('660343595626397699')} Por favor tente outra vez mais tarde.`));
 
             let em = new Discord.RichEmbed()
                 .setAuthor(res[0].channelTitle, res[0].thumbnails.high.url)
